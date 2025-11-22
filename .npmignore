@@ -1,7 +1,51 @@
+# Source code
 /src
-/node_modules
+/src/**/*
 
+# Development files
 tsconfig.json
-tsup.config.tsconfig
+tsup.config.ts
+eslint.config.js
+.vscode
+.idea
+*.log
+*.lock
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
 
+# Git
+.git
+.gitignore
 .github
+
+# Testing
+coverage
+.nyc_output
+*.test.js
+*.test.ts
+test
+tests
+
+# Build artifacts (keep only dist/)
+*.tsbuildinfo
+.cache
+
+# OS generated files
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+
+# Documentation drafts
+*.md~
+README.md.bak
+
+# CI/CD
+.github
+.gitlab-ci.yml
+.travis.yml
+.circleci
+
+# Development scripts
+scripts/

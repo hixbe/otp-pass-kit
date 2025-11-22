@@ -1,24 +1,87 @@
 {
-  "name": "otp-pass-kit-2",
-  "version": "1.0.4",
+  "name": "@hixbe/otp-pass-kit",
+  "version": "2.0.0",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
-  "type": "module",
+  "bin": {
+    "otp-pass-kit": "./dist/cli.js"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
   "scripts": {
-    "build": "tsup"
+    "build": "tsup",
+    "test": "vitest",
+    "test:run": "vitest run",
+    "lint": "eslint src/**/*.ts",
+    "lint:fix": "eslint src/**/*.ts --fix",
+    "type-check": "tsc --noEmit",
+    "cli": "node dist/cli.js"
   },
   "keywords": [
     "otp",
     "password",
-    "generate"
+    "generator",
+    "security",
+    "random",
+    "crypto",
+    "authentication",
+    "typescript",
+    "cli",
+    "command-line",
+    "utility",
+    "random-string",
+    "password-generator",
+    "otp-generator",
+    "secure-password",
+    "cryptographically-secure",
+    "node",
+    "nodejs",
+    "npm-package",
+    "library"
   ],
-  "author": "Anis Afifi",
+  "author": {
+    "name": "Hixbe",
+    "email": "git@hixbe.com",
+    "url": "https://github.com/hixbe"
+  },
   "license": "MIT",
-  "description": "A simple OTP and password generator",
+  "description": "A secure, cryptographically-strong OTP and password generator for Node.js with CLI support. Generate customizable one-time passwords and strong passwords with TypeScript support.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hixbe/otp-pass-kit.git"
+  },
+  "homepage": "https://github.com/hixbe/otp-pass-kit#readme",
+  "bugs": {
+    "url": "https://github.com/hixbe/otp-pass-kit/issues"
+  },
+  "funding": {
+    "type": "github",
+    "url": "https://github.com/sponsors/hixbe"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "cpu": [
+    "x64",
+    "arm64",
+    "ia32"
+  ],
+  "os": [
+    "linux",
+    "darwin",
+    "win32"
+  ],
   "devDependencies": {
+    "@types/node": "^22.10.1",
+    "@typescript-eslint/eslint-plugin": "^8.18.1",
+    "@typescript-eslint/parser": "^8.18.1",
+    "eslint": "^9.17.0",
     "terser": "^5.39.0",
     "tsup": "^8.4.0",
-    "typescript": "^5.8.2"
+    "typescript": "^5.8.2",
+    "vitest": "^2.1.8"
   }
 }

@@ -1,6 +1,7 @@
 import {defineConfig } from 'tsup'
 // -------------------------------
-export default defineConfig ({
+export default [
+  {
     format: ['cjs', 'esm'],
     entryPoints: ['src/index.ts'],
     dts: true,
@@ -22,4 +23,14 @@ export default defineConfig ({
             comments: false
         }
     }
-})
+  },
+  {
+    format: ['cjs'],
+    entryPoints: ['src/cli.ts'],
+    dts: true,
+    shims: true,
+    skipNodeModulesBundle: true,
+    clean: false,
+    minify: false
+  }
+]
