@@ -18,9 +18,13 @@ Commands:
 Options:
   -l, --length <number>     Length of the generated string (default: 6 for otp, 8 for pass)
   -d, --digits              Include digits (default: true for otp, true for pass)
+  --no-digits               Exclude digits
   -u, --uppercase           Include uppercase letters (default: false for otp, true for pass)
+  --no-uppercase            Exclude uppercase letters
   -w, --lowercase           Include lowercase letters (default: false for otp, true for pass)
+  --no-lowercase            Exclude lowercase letters
   -s, --special             Include special characters (default: false for otp, true for pass)
+  --no-special              Exclude special characters
   -e, --ensure-each-type    Ensure at least one character from each enabled set
   -h, --help                Show this help message
 

@@ -44,10 +44,10 @@ console.log(password); // "rT8#mNpL2&k"
 
 ```bash
 # Generate OTP
-npx @hixbe/otp-pass-kit otp
+npx otp-pass-kit otp
 
 # Generate password
-npx @hixbe/otp-pass-kit pass -l 12 --ensure-each-type
+npx otp-pass-kit pass -l 12 --ensure-each-type
 
 # Install globally for easier access
 npm install -g @hixbe/otp-pass-kit
@@ -206,7 +206,7 @@ The package includes a powerful command-line interface for generating secure pas
 
 ```bash
 # Use with npx (no installation required)
-npx @hixbe/otp-pass-kit otp
+npx otp-pass-kit otp
 
 # Or install globally
 npm install -g @hixbe/otp-pass-kit
@@ -238,9 +238,13 @@ otp-pass-kit --help
 
 - `-l, --length <number>`: Set password/OTP length
 - `-d, --digits`: Include digits
+- `--no-digits`: Exclude digits
 - `-u, --uppercase`: Include uppercase letters
+- `--no-uppercase`: Exclude uppercase letters
 - `-w, --lowercase`: Include lowercase letters
+- `--no-lowercase`: Exclude lowercase letters
 - `-s, --special`: Include special characters
+- `--no-special`: Exclude special characters
 - `-e, --ensure-each-type`: Ensure each character type is represented
 - `-h, --help`: Show help information
 
