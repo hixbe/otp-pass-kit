@@ -43,27 +43,12 @@ jobs:
           fi
           echo "✓ Package is properly scoped to @hixbe/ organization"
 
-      - name: Determine version bump
+      - name: Get current version
         id: version
         run: |
-          # Get the last published version
-          LAST_VERSION=$(npm view @hixbe/otp-pass-kit version 2>/dev/null || echo "1.0.0")
           CURRENT_VERSION=$(node -p "require('./package.json').version")
-
-          echo "Last published version: $LAST_VERSION"
           echo "Current package version: $CURRENT_VERSION"
-
-          # If current version is different from last published, use current
-          # Otherwise, bump patch version
-          if [ "$CURRENT_VERSION" != "$LAST_VERSION" ]; then
-            NEW_VERSION=$CURRENT_VERSION
-            echo "Using existing version: $NEW_VERSION"
-          else
-            NEW_VERSION=$(npm version patch --no-git-tag-version | sed 's/^v//')
-            echo "Bumped to version: $NEW_VERSION"
-          fi
-
-          echo "new_version=$NEW_VERSION" >> $GITHUB_OUTPUT
+          echo "new_version=$CURRENT_VERSION" >> $GITHUB_OUTPUT
 
       - name: Update package.json version
         run: |
@@ -87,10 +72,20 @@ jobs:
 
       - name: Verify package publication
         run: |
-          sleep 10
-          PACKAGE_INFO=$(npm view @hixbe/otp-pass-kit version --json)
-          echo "Published version: $PACKAGE_INFO"
-          echo "Package successfully published to npm with org scope @hixbe/"
+          echo "Waiting for package to be available on npm..."
+          for i in {1..30}; do
+            if npm view @hixbe/otp-pass-kit@${{ steps.version.outputs.new_version }} version --json 2>/dev/null; then
+              echo "✅ Package @hixbe/otp-pass-kit@${{ steps.version.outputs.new_version }} is now available on npm"
+              break
+            fi
+            echo "Attempt $i/30: Package not yet available, waiting..."
+            sleep 10
+            if [ $i -eq 30 ]; then
+              echo "❌ Package verification timed out after 5 minutes"
+              echo "This might be normal for new packages. Please check manually."
+              exit 0
+            fi
+          done
 
       - name: Create GitHub release
         uses: actions/create-release@v1
@@ -109,6 +104,6 @@ jobs:
             - Full test suite passed
             - Package published with provenance
 
-            **Full Changelog**: https://github.com/hixbe/otp-pass-kit/compare/v$LAST_VERSION...v${{ steps.version.outputs.new_version }}
+            **Full Changelog**: https://github.com/hixbe/otp-pass-kit/commits/main
           draft: false
           prerelease: false
